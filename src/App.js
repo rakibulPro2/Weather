@@ -5,9 +5,11 @@ import { useState } from "react";
 function App() {
   let [city, setCity] = useState("");
   let [wdetails, setWdetails] = useState();
-  console.log(city);
+  let [isLoading, setIsLoading] = useState(false)
+
 
   let getData = (event) => {
+    setIsLoading(true)
     fetch(
       `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=a60c84f94e94ad950c1ebbe843f1c5a3&units=matic`,
     )
@@ -22,6 +24,7 @@ function App() {
 
     event.preventDefault();
     setCity("");
+    setIsLoading(false)
   };
 
   return (
@@ -45,7 +48,8 @@ function App() {
           </form>
         </div>
 
-        <div className="w-[400px] bg-white mx-auto shadow-lg mt-[40px] p-[25px]">
+        <div className="w-[400px] bg-white mx-auto shadow-lg mt-[40px] p-[25px] relative">
+          <img width={50} src="https://media.tenor.com/WX_LDjYUrMsAAAAi/loading.gif" className={`absolute left-[43%] ${isLoading ? '' : 'hidden'}`}/>
           {wdetails !== undefined ? (
             <>
               <h3 className="font-bold text-[30px]">

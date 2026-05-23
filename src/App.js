@@ -1,8 +1,18 @@
 import logo from "./logo.svg";
 import "./App.css";
+import { useState } from "react";
 
 function App() {
-  
+  let [city, setCity] = useState('')
+  console.log(city)
+
+  let getData = (event) =>{
+
+
+    event.preventDefault()
+    setCity('')
+  }
+
   return (
     <div className="w-[100%] h-[100vh] bg-emerald-500">
       <div className="w-[1320px] mx-auto text-center">
@@ -10,11 +20,13 @@ function App() {
           <h1 className="text-white font-bold text-[30px] py-5 text-center">
             Simple Weather Check For UAE
           </h1>
-          <form>
+          <form onSubmit={getData}>
             <input
               className="w-[520px] px-3 py-4 rounded-sm shadow-lg"
               type="text"
               placeholder="Check Weather for city"
+              value={city}
+              onChange={(event)=>setCity(event.target.value)}
             />
             <button className="px-5 py-4 bg-white ml-4  rounded-sm shadow-lg">
               Search
